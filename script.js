@@ -1,7 +1,8 @@
+const InfoOfCountry = document.querySelector('.info')
 const selectArea = document.querySelector('select');
 selectArea.value = 'Africa';
-const gridOfCountries = document.querySelector('.countries')
-const searchField = document.querySelector('.search-field')
+const gridOfCountries = document.querySelector('.countries');
+const searchField = document.querySelector('.search-field');
 
 selectArea.addEventListener('change', selectContinent)
 
@@ -41,7 +42,6 @@ function showCountriesContinent(continent) {
         const countryCard = document.createElement('div');
         const flagImg = document.createElement('img');
         flagImg.src = country.flags.png;
-        // flagImg.alt = `${country.name.common} flag`;
         countryCard.append(flagImg);
 
         const nameElement = document.createElement('h2');
@@ -50,40 +50,49 @@ function showCountriesContinent(continent) {
 
         const populationElement = document.createElement('p');
         populationElement.textContent = country.population;
-        //`population: ${country.population}`;
         countryCard.append(populationElement);
+
+        countryCard.addEventListener('click', function() {
+            showInfoOfCountries(country)
+        })
 
         gridOfCountries.append(countryCard);
     })
+}
 
-    searchField.addEventListener('keyup', function() {
-        selectedCountries.forEach((country => {
-            if(country.name.common.toLowerCase().includes(searchField.value.toLowerCase())) {
-                console.log(country.name.common)
-            }
-        }))
-    })
+function showInfoOfCountries(country) {
+    InfoOfCountry.innerHTML = '';
+
+    // country = allCountries.find(function(country) {
+    //     return country.name.common === countryName;
+    // });
+    
+    // if (country) {
+    // InfoOfCountry.innerHTML = '';
+    // }
+
+    // countryCard = document.createElement('div');
+    const nameElement = document.createElement('h2');
+    nameElement.textContent = country.name.common;
+    InfoOfCountry.append(nameElement);
+
+    const populationElement = document.createElement('p');
+    populationElement.textContent = country.population;
+    InfoOfCountry.append(populationElement);
+
+    const capitalElement = document.createElement('p');
+    capitalElement.textContent = country.capital;
+    InfoOfCountry.append(capitalElement);
+
+    const languageElement = document.createElement('p');
+    languageElement.textContent = country.languages[Object.keys(country.languages)[0]];
+    InfoOfCountry.append(languageElement);
+
+    InfoOfCountry.style.display = 'block'
 }
 
 
-
-// function searchInputField() {
-//     if(gridOfCountries.innerText.toLowerCase().includes(searchField.value.toLowerCase())) {
-//         gridOfCountries.style.display = 'grid';
-//     }
-//     else {
-//         gridOfCountries.style.display = 'none'
-//     }
-// }
-// searchInputField();
-
-// searchField.addEventListener('keyup', searchInputField)
-
-
-
-
-
-showCountriesContinent()
+// showCountriesContinent()
 
 
 
