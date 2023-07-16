@@ -3,18 +3,14 @@ const selectArea = document.querySelector('select');
 selectArea.value = 'Africa';
 const gridOfCountries = document.querySelector('.countries');
 const searchField = document.querySelector('.search-field');
+let allCountries = [];
 
-selectArea.addEventListener('change', selectContinent)
+selectArea.addEventListener('change', selectContinent);
+searchField.addEventListener('input', function() {
+    searchCountries(searchField.value);
+});
 
-// searchField.addEventListener('input', function() {
-//     searchCountries(searchField.value)
-// })
-
-
-let allCountries = []
-
-selectContinent()
-
+selectContinent();
 
 function selectContinent() {
     fetch('https://restcountries.com/v3.1/all')
@@ -27,10 +23,9 @@ function selectContinent() {
     });
 }
 
+function showCountriesContinent(continent, countries = allCountries) {
 
-function showCountriesContinent(continent) {
-
-    const selectedCountries = allCountries.filter(function(country) {
+    const selectedCountries = countries.filter(function(country) {
         if(country.continents.includes(continent)){
             return country
         }
@@ -49,7 +44,7 @@ function showCountriesContinent(continent) {
         countryCard.append(nameElement);
 
         const populationElement = document.createElement('p');
-        populationElement.textContent = country.population;
+        populationElement.textContent = `Population: ${country.population}`;
         countryCard.append(populationElement);
 
         countryCard.addEventListener('click', function() {
@@ -63,36 +58,33 @@ function showCountriesContinent(continent) {
 function showInfoOfCountries(country) {
     InfoOfCountry.innerHTML = '';
 
-    // country = allCountries.find(function(country) {
-    //     return country.name.common === countryName;
-    // });
-    
-    // if (country) {
-    // InfoOfCountry.innerHTML = '';
-    // }
-
-    // countryCard = document.createElement('div');
     const nameElement = document.createElement('h2');
     nameElement.textContent = country.name.common;
     InfoOfCountry.append(nameElement);
 
     const populationElement = document.createElement('p');
-    populationElement.textContent = country.population;
+    populationElement.textContent = `Population: ${country.population}`;
     InfoOfCountry.append(populationElement);
 
     const capitalElement = document.createElement('p');
-    capitalElement.textContent = country.capital;
+    capitalElement.textContent = `Capital: ${country.capital}`;
     InfoOfCountry.append(capitalElement);
 
     const languageElement = document.createElement('p');
-    languageElement.textContent = country.languages[Object.keys(country.languages)[0]];
+    languageElement.textContent = `Language: ${country.languages[Object.keys(country.languages)[0]]}`;
     InfoOfCountry.append(languageElement);
 
     InfoOfCountry.style.display = 'block'
 }
 
 
-// showCountriesContinent()
+function searchCountries(searchTerm) {
+    const filteredCountries = allCountries.filter(function(country) {
+        const countryName = country.name.common.toLowerCase();
+        return countryName.includes(searchTerm.toLowerCase());
+    })
+    showCountriesContinent(selectArea.value, filteredCountries);
+}
 
 
 

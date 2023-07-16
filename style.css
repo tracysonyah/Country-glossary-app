@@ -11,9 +11,8 @@ body {
 .countries {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    background-attachment: fixed;
     margin-top: 30px;
-    transition: 40px;
+    transition: all 8.5s;
 }
 
 .header {
