@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Country Glossary App</title>
+    <title>Glossary</title>
 </head>
 <link rel="stylesheet" href="style.css">
 <body>
     <div class="container">
         <div class="header">
             <input placeholder="Search" type="text" class="search-field">
-            <select onchange="selectContinent(event)">
+            <select>
                 <option value="Africa" selected>Africa</option>
                 <option value="Europe">Europe</option>
                 <option value="Asia">Asia</option>
@@ -19,23 +19,7 @@
                 <option value="Antartica">Antartica</option>
             </select>
         </div>
-        <div class="main">
-            <div class="country1">
-                <img src="lib.png" alt="img">
-                <h1 class="">Africa</h1>
-                <p>popuplation</p>
-            </div>
-            <div class="country2">
-                <img src="europe.jpeg" alt="img">
-                <h1>Europe</h1>
-                <p>popuplation</p>
-            </div>
-            <div class="country3">
-                <img src="korean.jpeg" alt="img">
-                <h1>Asia</h1>
-                <p>popuplation</p>
-            </div>
-        </div>
+            <div class="countries"></div>
     </div>
     <script src="script.js"></script>
 </body>
