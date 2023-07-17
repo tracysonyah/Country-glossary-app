@@ -35,6 +35,7 @@ function showCountriesContinent(continent, countries = allCountries) {
 
     selectedCountries.forEach(function(country) {
         const countryCard = document.createElement('div');
+        countryCard.setAttribute("class", "grid")
         const flagImg = document.createElement('img');
         flagImg.src = country.flags.png;
         countryCard.append(flagImg);
