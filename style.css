@@ -25,7 +25,7 @@ body {
 }
 
 .grid:hover {
-    transform: scale(20) skew(-20deg);
+    transform: scale(0) skew(-0deg);
     /* transform: rotate(-360deg); */
 }
 

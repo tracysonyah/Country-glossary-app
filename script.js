@@ -62,7 +62,7 @@ function showInfoOfCountries(country) {
 
     const nameElement = document.createElement('h2');
     nameElement.textContent = country.name.common;
-    InfoOfCountry.append(nameElement);
+    InfoOfCountry.append(nameElement).windows.location.href="countryInfo.html";
 
     const populationElement = document.createElement('p');
     populationElement.textContent = `Population: ${country.population}`;
