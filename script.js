@@ -19,6 +19,7 @@ function selectContinent() {
     })
     .then(function(data) {
         allCountries = data;
+        console.log(allCountries)
         showCountriesContinent(selectArea.value)
     });
 }
@@ -74,6 +75,18 @@ function showInfoOfCountries(country) {
     const languageElement = document.createElement('p');
     languageElement.textContent = `Language: ${country.languages[Object.keys(country.languages)[0]]}`;
     InfoOfCountry.append(languageElement);
+
+    const regionElement = document.createElement('p');
+    regionElement.textContent = `Region: ${country.region}`
+    InfoOfCountry.append(regionElement);
+
+    const subregionElement = document.createElement('p');
+    subregionElement.textContent = `Sub-Region: ${country.subregion}`
+    InfoOfCountry.append(subregionElement);
+
+    const timezonesElement = document.createElement('p');
+    timezonesElement.textContent = `TimeZone: ${country.timezones}`
+    InfoOfCountry.append(timezonesElement);
 
     InfoOfCountry.style.display = 'block'
 }
