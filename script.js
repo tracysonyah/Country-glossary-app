@@ -1,4 +1,3 @@
-const InfoOfCountry = document.querySelector('.info')
 const selectArea = document.querySelector('select');
 selectArea.value = 'Africa';
 const gridOfCountries = document.querySelector('.countries');
@@ -35,6 +34,7 @@ function showCountriesContinent(continent, countries = allCountries) {
     gridOfCountries.innerHTML = '';
 
     selectedCountries.forEach(function(country) {
+        //for each country, create a card to display the display the flag, name and population
         const countryCard = document.createElement('div');
         countryCard.setAttribute("class", "grid")
         const flagImg = document.createElement('img');
@@ -49,49 +49,52 @@ function showCountriesContinent(continent, countries = allCountries) {
         populationElement.textContent = `Population: ${country.population}`;
         countryCard.append(populationElement);
 
+
+        //add an event listener on each country card to display the below details when clicked
         countryCard.addEventListener('click', function() {
-            showInfoOfCountries(country)
+            
+            const countryPopup = document.querySelector('.country-popup');
+
+            const flagImg = countryPopup.querySelector('.country-flag');
+            flagImg.src = country.flags.png;
+
+            const nameElement = countryPopup.querySelector('.country-name');
+            nameElement.textContent = country.name.common;
+
+            const capitalElement = countryPopup.querySelector('.country-capital');
+            capitalElement.textContent = `Capital: ${country.capital}`;
+
+            const populationElement = countryPopup.querySelector('.country-population');
+            populationElement.textContent = `Population: ${country.population}`;
+
+            const regionElement = countryPopup.querySelector('.country-region');
+            regionElement.textContent = `Region: ${country.region}`
+
+            const subregionElement = countryPopup.querySelector('.subregion');
+            subregionElement.textContent = `Sub-Region: ${country.subregion}`
+
+            const languageElement = countryPopup.querySelector('.country-language');
+            languageElement.textContent = `Language: ${country.languages[Object.keys(country.languages)[0]]}`;
+
+            const timezoneElement = countryPopup.querySelector('.country-timezone');
+            timezoneElement.textContent = `TimeZone: ${country.timezones}`;
+
+            //display the popup when a country is clicked
+            countryPopup.style.display = 'block';
+
+            //add an event lsitener on the document to display none when u click outside the popup
+            document.addEventListener('click', function(event) {
+                if(event.target === countryPopup) {
+                    countryPopup.style.display = 'none';
+                }
+            }) 
         })
 
         gridOfCountries.append(countryCard);
     })
 }
 
-function showInfoOfCountries(country) {
-    InfoOfCountry.innerHTML = '';
-
-    const nameElement = document.createElement('h2');
-    nameElement.textContent = country.name.common;
-    InfoOfCountry.append(nameElement).windows.location.href="countryInfo.html";
-
-    const populationElement = document.createElement('p');
-    populationElement.textContent = `Population: ${country.population}`;
-    InfoOfCountry.append(populationElement);
-
-    const capitalElement = document.createElement('p');
-    capitalElement.textContent = `Capital: ${country.capital}`;
-    InfoOfCountry.append(capitalElement);
-
-    const languageElement = document.createElement('p');
-    languageElement.textContent = `Language: ${country.languages[Object.keys(country.languages)[0]]}`;
-    InfoOfCountry.append(languageElement);
-
-    const regionElement = document.createElement('p');
-    regionElement.textContent = `Region: ${country.region}`
-    InfoOfCountry.append(regionElement);
-
-    const subregionElement = document.createElement('p');
-    subregionElement.textContent = `Sub-Region: ${country.subregion}`
-    InfoOfCountry.append(subregionElement);
-
-    const timezonesElement = document.createElement('p');
-    timezonesElement.textContent = `TimeZone: ${country.timezones}`
-    InfoOfCountry.append(timezonesElement);
-
-    InfoOfCountry.style.display = 'block'
-}
-
-
+//activate the search field, enable case sensitivity
 function searchCountries(searchTerm) {
     const filteredCountries = allCountries.filter(function(country) {
         const countryName = country.name.common.toLowerCase();
